@@ -16,6 +16,8 @@ const io = socketIO(server);
 io.on('connection', (socket) => {
   console.log('Client connected');
   socket.on('shreedakshina',(data)=>{io.emit('shreedakshina',data)});
+  socket.on('jd-server',(data)=>{io.emit('jd-server',data)});
+  socket.on('jd-client',(data)=>{io.emit('jd-client',data)});
   socket.on('disconnect', () => console.log('Client disconnected'));
 });
 
