@@ -16,18 +16,18 @@ const io = socketIO(server);
 
 io.on('connection', (socket) => {
   console.log('Client connected');
+  var tmpcstream = ss.createStream();
+  var tmpstream = ss.createStream();
   socket.on('shreedakshina',(data)=>{io.emit('shreedakshina',data)});
   socket.on('jd-server',(data)=>{io.emit('jd-server',data)});
   socket.on('jd-client',(data)=>{io.emit('jd-client',data)});
   ss(socket).on('jd-server-sync', (stream,data)=> {
     console.log('Data @ jd-server-sync');
-    var tmpstream = ss.createStream();
     ss(socket).emit('jd-server-sync', tmpstream, data);
     stream.pipe(tmpstream);
   });
  ss(socket).on('jd-client-sync', (stream,data)=> {
    console.log('Data @ jd-client-sync');
-   var tmpcstream = ss.createStream();
     ss(socket).emit('jd-client-sync', tmpcstream, data);
    stream.pipe(tmpcstream);
   });
