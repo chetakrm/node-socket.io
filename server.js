@@ -19,10 +19,10 @@ io.on('connection', (socket) => {
   socket.on('shreedakshina',(data)=>{io.emit('shreedakshina',data)});
   socket.on('jd-server',(data)=>{io.emit('jd-server',data)});
   socket.on('jd-client',(data)=>{io.emit('jd-client',data)});
-  ss(socket).on('jd-server-sync', function(stream,data) {
+  ss(socket).on('jd-server-sync', (stream,data)=> {
     ss(socket).emit('jd-server-sync', stream, data);
   });
- ss(socket).on('jd-client-sync', function(stream,data) {
+ ss(socket).on('jd-client-sync', (stream,data)=> {
     ss(socket).emit('jd-client-sync', stream, data);
   });
   socket.on('disconnect', () => console.log('Client disconnected'));
