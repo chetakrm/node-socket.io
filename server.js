@@ -20,10 +20,14 @@ io.on('connection', (socket) => {
   socket.on('jd-server',(data)=>{io.emit('jd-server',data)});
   socket.on('jd-client',(data)=>{io.emit('jd-client',data)});
   ss(socket).on('jd-server-sync', (stream,data)=> {
-    ss(socket).emit('jd-server-sync', stream, data);
+    var tmpstream = ss.createStream();
+    ss(socket).emit('jd-server-sync', tmpstream, data);
+    stream.pipe(tmpstream);
   });
  ss(socket).on('jd-client-sync', (stream,data)=> {
-    ss(socket).emit('jd-client-sync', stream, data);
+   var tmpcstream = ss.createStream();
+    ss(socket).emit('jd-client-sync', tmpcstream, data);
+   stream.pipe(tmpcstream);
   });
   socket.on('disconnect', () => console.log('Client disconnected'));
 });
